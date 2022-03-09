@@ -13,7 +13,12 @@ const signUpOwner = handleAsyncError(async (req, res, next) => {
 });
 
 const getOwner = handleAsyncError(async (req, res, next) => {
-  const owner = await Owner.findOne({ _id: req.params.id });
+  let owner = null;
+  if (req.url.includes("/me")) {
+    owner = req.owner;
+  } else {
+    owner = await Owner.findOne({ _id: req.params.id });
+  }
   if (!owner) {
     return next(new AppError("No Owner found with the ID", 404));
   }
@@ -24,7 +29,12 @@ const getOwner = handleAsyncError(async (req, res, next) => {
 });
 
 const deleteOwner = handleAsyncError(async (req, res, next) => {
-  const owner = await Owner.findOne({ _id: req.params.id });
+  let owner = null;
+  if (req.url.includes("/me")) {
+    owner = req.owner;
+  } else {
+    owner = await Owner.findOne({ _id: req.params.id });
+  }
   if (!owner) {
     return next(new AppError("No document found with that ID", 404));
   }
@@ -69,7 +79,12 @@ const loginOwner = handleAsyncError(async (req, res, next) => {
 });
 
 const updateOwner = handleAsyncError(async (req, res, next) => {
-  let owner = await Owner.findById(req.params.id);
+  let owner = null;
+  if (req.url.includes("/me")) {
+    owner = req.owner;
+  } else {
+    owner = await Owner.findOne({ _id: req.params.id });
+  }
 
   const updates = Object.keys(req.body);
   const allowedUpdates = ["firstname", "lastname", "email", "password"];
