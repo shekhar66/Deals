@@ -2,7 +2,6 @@ const Pipeline = require("../model/pipelineModel");
 const handleAsyncError = require("../utils/handleAsyncError");
 const APIFeatures = require("../utils/apiFeatures");
 const AppError = require("../utils/appError");
-require("./errorController");
 
 const addPipeline = handleAsyncError(async (req, res, next) => {
   const pipeline = await Pipeline.create(req.body);

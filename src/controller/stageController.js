@@ -3,7 +3,6 @@ const handleAsyncError = require("../utils/handleAsyncError");
 const APIFeatures = require("../utils/apiFeatures");
 const AppError = require("../utils/appError");
 const Pipeline = require("../model/pipelineModel");
-require("./errorController");
 
 const addStage = handleAsyncError(async (req, res, next) => {
   // Check for Pipeline provided by User already exists or not
