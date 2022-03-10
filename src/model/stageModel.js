@@ -7,7 +7,6 @@ const stageSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      unique: true,
     },
     winpercent: {
       type: Number,
